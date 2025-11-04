@@ -16793,7 +16793,9 @@ ul {
 }/*# sourceMappingURL=styles.css.map */
 
 * {
-  cursor: url("../assets/cursor.png") 12 12, auto;
+  cursor: url("cursor.png") 12 12, auto;
 }
+
+
 
 
