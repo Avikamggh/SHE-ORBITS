@@ -9,44 +9,6 @@
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
   <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
   <link rel="stylesheet" href="../assets/css/styles.css" />
-  
-  <!-- SPLINE ROBOT SCRIPT -->
-  <script type="module" src="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.js"></script>
-  
-  <!-- ROBOT STYLING -->
-  <style>
-    #robot-container {
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-    }
-
-    #robot-container spline-viewer {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-
-    @keyframes robotAppear {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    #robot-container[style*="display: block"] {
-      animation: robotAppear 0.4s ease-out;
-    }
-
-    #robot-container:hover {
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-    }
-  </style>
 </head>
 
 <body>
@@ -118,16 +80,6 @@
       <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
         <source src="../assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
       </video>
-      
-      <!-- ============ ROBOT CONTAINER ============ -->
-      <div id="robot-container" class="position-fixed" 
-           style="width: 300px; height: 300px; display: none; z-index: 9999; border-radius: 15px; overflow: hidden;">
-        <spline-viewer url="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
-                        style="width: 100%; height: 100%;">
-        </spline-viewer>
-      </div>
-      <!-- ========== END ROBOT CONTAINER ========== -->
-      
       <div class="container">
         <div class="d-flex flex-column gap-4 pb-8 position-relative z-1">
           <div class="row align-items-center">
@@ -1340,7 +1292,6 @@
     </button>
   </div>
 
-  <!-- SCRIPTS -->
   <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
@@ -1348,121 +1299,6 @@
   <script src="../assets/js/custom.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-
-  <!-- ============ ROBOT INTERACTIVE SCRIPT ============ -->
-  <script>
-    // ========================================
-    // INTERACTIVE ROBOT - Click & Face Tracking
-    // ========================================
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const robotContainer = document.getElementById('robot-container');
-      
-      if (!robotContainer) {
-        console.warn('Robot container (#robot-container) not found in HTML');
-        return;
-      }
-
-      console.log('✓ Robot container loaded successfully');
-
-      // ============ FEATURE 1: CLICK ANYWHERE TO SHOW ROBOT ============
-      document.addEventListener('click', function(e) {
-        // Don't trigger if clicking on the robot itself
-        if (robotContainer.contains(e.target)) {
-          return;
-        }
-
-        const clickX = e.clientX;
-        const clickY = e.clientY;
-        
-        // Show robot at click position
-        robotContainer.style.display = 'block';
-        robotContainer.style.position = 'fixed';
-        robotContainer.style.left = (clickX - 150) + 'px'; // 150 = half of 300px width
-        robotContainer.style.top = (clickY - 150) + 'px';  // 150 = half of 300px height
-        robotContainer.style.zIndex = '9999';
-        
-        console.log('🤖 Robot appeared at position:', clickX, clickY);
-      });
-
-      // ============ FEATURE 2: MOUSE HOVER FACE TRACKING ============
-      const splineViewer = robotContainer.querySelector('spline-viewer');
-      
-      if (splineViewer) {
-        document.addEventListener('mousemove', function(e) {
-          // Only track if robot is visible
-          if (robotContainer.style.display === 'block' && robotContainer.style.display !== 'none') {
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            // Get robot center position
-            const robCenterX = parseInt(robotContainer.style.left) + 150;
-            const robCenterY = parseInt(robotContainer.style.top) + 150;
-            
-            // Calculate distance and angle
-            const dx = mouseX - robCenterX;
-            const dy = mouseY - robCenterY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            // Only apply tracking if close enough (within 500px)
-            if (distance < 500 && distance > 10) {
-              // Calculate rotation angles for more realistic head tracking
-              const rotateX = (dy / distance) * 15; // vertical tilt
-              const rotateY = (dx / distance) * 15; // horizontal tilt
-              
-              // Apply 3D perspective effect
-              splineViewer.style.transform = 
-                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
-          }
-        });
-      }
-
-      // ============ FEATURE 3: CLOSE ROBOT (ESC KEY) ============
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' || e.keyCode === 27) {
-          robotContainer.style.display = 'none';
-          console.log('🚫 Robot hidden (ESC pressed)');
-        }
-      });
-
-      // ============ BONUS: DRAG ROBOT AROUND ============
-      let isDragging = false;
-      let dragOffsetX = 0;
-      let dragOffsetY = 0;
-
-      robotContainer.addEventListener('mousedown', function(e) {
-        if (robotContainer.style.display === 'block') {
-          isDragging = true;
-          const rect = robotContainer.getBoundingClientRect();
-          dragOffsetX = e.clientX - rect.left;
-          dragOffsetY = e.clientY - rect.top;
-          robotContainer.style.cursor = 'grabbing';
-        }
-      });
-
-      document.addEventListener('mousemove', function(e) {
-        if (isDragging) {
-          robotContainer.style.left = (e.clientX - dragOffsetX) + 'px';
-          robotContainer.style.top = (e.clientY - dragOffsetY) + 'px';
-        }
-      });
-
-      document.addEventListener('mouseup', function() {
-        isDragging = false;
-        robotContainer.style.cursor = 'default';
-      });
-
-      console.log('✓ Robot interactive features loaded');
-      console.log('📝 Controls:');
-      console.log('  • Click anywhere to show robot');
-      console.log('  • Move mouse to make robot follow');
-      console.log('  • Drag robot to move it');
-      console.log('  • Press ESC to hide robot');
-    });
-  </script>
-  <!-- ========== END ROBOT INTERACTIVE SCRIPT ========== -->
-
 </body>
 
 </html>
