@@ -62,10 +62,51 @@
     display: none;
     padding-left: 20px;
     margin-top: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-left: 2px solid rgba(107, 114, 128, 0.2);
+  }
+  
+  /* Scrollbar styling */
+  .submenu::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .submenu::-webkit-scrollbar-track {
+    background: rgba(107, 114, 128, 0.1);
+    border-radius: 2px;
+  }
+  
+  .submenu::-webkit-scrollbar-thumb {
+    background: rgba(107, 114, 128, 0.4);
+    border-radius: 2px;
+  }
+  
+  .submenu::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 114, 128, 0.6);
   }
   
   .submenu.show {
     display: block;
+  }
+  
+  /* Compact spacing for submenu items */
+  .submenu li {
+    margin-bottom: 8px !important;
+  }
+  
+  .submenu .fw-bold {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+    margin-top: 8px !important;
+  }
+  
+  .submenu a {
+    transition: all 0.3s ease;
+    display: block;
+    padding: 3px 0;
+    font-size: 14px !important;
   }
   
   /* Desktop hover functionality */
@@ -73,12 +114,6 @@
     .header-item:hover .submenu {
       display: block;
     }
-  }
-  
-  .submenu a {
-    transition: all 0.3s ease;
-    display: block;
-    padding: 5px 0;
   }
   
   .submenu a:hover {
@@ -202,18 +237,18 @@
                           src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
                           class="img-fluid animate-spin">Opportunities</a>
                       <ul class="submenu list-unstyled ps-4 mt-2">
-                        <li class="fw-bold text-primary mb-2 fs-8">Ongoing</li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="programs.html">Programs</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="courses.html">Courses</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="fellowships.html">Fellowships</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="internships.html">Internships</a></li>
-                        <li class="my-3"><hr style="margin: 0; border-color: #e5e7eb;"></li>
-                        <li class="fw-bold text-primary mb-2 fs-8">Upcoming</li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="panels.html">Panels</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="competitions.html">Competitions</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="events.html">Events</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="conferences.html">Conferences</a></li>
-                        <li class="mb-2"><a class="text-dark text-decoration-none fs-7" href="workshops.html">Workshops</a></li>
+                        <li class="fw-bold text-primary fs-8">Ongoing</li>
+                        <li><a class="text-dark text-decoration-none" href="programs.html">Programs</a></li>
+                        <li><a class="text-dark text-decoration-none" href="courses.html">Courses</a></li>
+                        <li><a class="text-dark text-decoration-none" href="fellowships.html">Fellowships</a></li>
+                        <li><a class="text-dark text-decoration-none" href="internships.html">Internships</a></li>
+                        <li style="margin: 8px 0;"><hr style="margin: 0; border-color: #e5e7eb;"></li>
+                        <li class="fw-bold text-primary fs-8">Upcoming</li>
+                        <li><a class="text-dark text-decoration-none" href="panels.html">Panels</a></li>
+                        <li><a class="text-dark text-decoration-none" href="competitions.html">Competitions</a></li>
+                        <li><a class="text-dark text-decoration-none" href="events.html">Events</a></li>
+                        <li><a class="text-dark text-decoration-none" href="conferences.html">Conferences</a></li>
+                        <li><a class="text-dark text-decoration-none" href="workshops.html">Workshops</a></li>
                       </ul>
                     </li>
                     <li class="header-item">
@@ -535,7 +570,7 @@
       <!-- Contact and Social -->
       <div class="col-lg-3 text-center text-lg-end">
         <h6 class="text-uppercase fw-semibold mb-4" style="letter-spacing: 1px; color: #E5E7EB;">Connect With Us</h6>
-        <p class="mb-1"><a href="mailto:info@sheorbits.space" class="footer-link">info@sheorbits.space</a></p>
+        <p class="mb-1"><a href="/cdn-cgi/l/email-protection#bdd4d3dbd2fdced5d8d2cfdfd4c9ce93cecddcded8" class="footer-link"><span class="__cf_email__" data-cfemail="e78e898188a7948f828895858e9394c99497868482">[email&#160;protected]</span></a></p>
         <p class="mb-3"><a href="tel:+12025551234" class="footer-link">+1 (202) 555-1234</a></p>
         <div class="d-flex justify-content-center justify-content-lg-end gap-3">
           <a href="https://www.facebook.com/sheorbits" class="social-icon" target="_blank"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
@@ -624,7 +659,7 @@
     </button>
   </div>
 
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
   <script src="../assets/libs/aos-master/dist/aos.js"></script>
@@ -674,17 +709,3 @@
       
       headerItem.addEventListener('mouseleave', function() {
         hoverTimeout = setTimeout(() => {
-          const submenu = this.querySelector('.submenu');
-          if (submenu) {
-            submenu.style.display = 'none';
-            hasSubmenu.classList.remove('show');
-          }
-        }, 300);
-      });
-    }
-  });
-</script>
-
-</body>
-
-</html>
