@@ -153,6 +153,123 @@
     transform: translateX(5px);
     display: inline-block;
   }
+  
+  /* Desktop Navigation Styles */
+  .desktop-menu {
+    display: none;
+  }
+  
+  @media (min-width: 992px) {
+    .desktop-menu {
+      display: flex !important;
+    }
+  }
+  
+  .nav-link-desktop {
+    color: #374151;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .nav-link-desktop:hover,
+  .nav-link-desktop.active {
+    color: #6B7280;
+  }
+  
+  .nav-link-desktop.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #6B7280;
+  }
+  
+  /* Desktop Dropdown Menu */
+  .desktop-dropdown {
+    position: relative;
+  }
+  
+  .desktop-dropdown .dropdown-menu-desktop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 420px;
+    display: none;
+    margin-top: 15px;
+    z-index: 1000;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .desktop-dropdown:hover .dropdown-menu-desktop,
+  .desktop-dropdown:focus-within .dropdown-menu-desktop {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .dropdown-column {
+    flex: 1;
+  }
+  
+  .dropdown-header {
+    color: #6B7280;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  
+  .dropdown-menu-desktop .dropdown-item {
+    color: #4B5563;
+    text-decoration: none;
+    padding: 8px 0;
+    display: block;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .dropdown-menu-desktop .dropdown-item:hover {
+    color: #6B7280;
+    transform: translateX(5px);
+  }
+  
+  /* Logo styles */
+  .logo img {
+    height: 45px;
+  }
+  
+  @media (min-width: 992px) {
+    .logo img {
+      height: 50px;
+    }
+  }
+  
+  /* Header adjustments */
+  .header {
+    background-color: white;
+    z-index: 999;
+  }
+  
+  .header-wrapper {
+    padding: 15px 0;
+  }
+  
+  @media (min-width: 992px) {
+    .header-wrapper {
+      padding: 18px 0;
+    }
+  }
 </style>
 </head>
   
@@ -164,8 +281,49 @@
     <div class="container">
       <div class="header-wrapper d-flex align-items-center justify-content-between">
        
-        <div class="d-flex align-items-center gap-4 ms-auto">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="../assets/images/logos/logo-dark.svg" alt="SHE ORBITS">
+          </a>
+        </div>
 
+        <!-- Desktop Menu (visible on lg and up) -->
+        <nav class="desktop-menu d-none d-lg-flex align-items-center gap-5">
+          <a href="index.html" class="nav-link-desktop active">Home</a>
+          <a href="about.html" class="nav-link-desktop">About</a>
+          <a href="mission-vision.html" class="nav-link-desktop">Mission & Vision</a>
+          
+          <!-- Opportunities Dropdown -->
+          <div class="desktop-dropdown">
+            <a href="#" class="nav-link-desktop" onclick="return false;">
+              Opportunities <span style="font-size: 10px;">▼</span>
+            </a>
+            <div class="dropdown-menu-desktop">
+              <div class="dropdown-column">
+                <h6 class="dropdown-header">Ongoing</h6>
+                <a class="dropdown-item" href="programs.html">Programs</a>
+                <a class="dropdown-item" href="courses.html">Courses</a>
+                <a class="dropdown-item" href="fellowships.html">Fellowships</a>
+                <a class="dropdown-item" href="internships.html">Internships</a>
+              </div>
+              <div class="dropdown-column">
+                <h6 class="dropdown-header">Upcoming</h6>
+                <a class="dropdown-item" href="panels.html">Panels</a>
+                <a class="dropdown-item" href="competitions.html">Competitions</a>
+                <a class="dropdown-item" href="events.html">Events</a>
+                <a class="dropdown-item" href="conferences.html">Conferences</a>
+                <a class="dropdown-item" href="workshops.html">Workshops</a>
+              </div>
+            </div>
+          </div>
+          
+          <a href="sectors.html" class="nav-link-desktop">Sectors</a>
+          <a href="contact.html" class="nav-link-desktop">Contact</a>
+        </nav>
+
+        <!-- Mobile Hamburger Menu (visible on md and below) -->
+        <div class="d-flex align-items-center gap-4 ms-auto d-lg-none">
           <div class="btn-group">
             <button
               class="btn btn-secondary toggle-menu round-45 p-2 d-flex align-items-center justify-content-center bg-white rounded-circle"
@@ -226,13 +384,12 @@
                           class="img-fluid animate-spin">Contact</a>
                     </li>
                   </ul>
-                  
                 </div>
-                
               </div>
             </ul>
           </div>
         </div>
+
       </div>
     </div>
   </header>
